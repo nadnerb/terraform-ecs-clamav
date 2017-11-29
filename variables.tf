@@ -23,6 +23,10 @@ variable "ecs_cluster_id" {
   description = "The id (arn) of the Amazon ECS cluster."
 }
 
+variable "ecs_cluster_name" {
+  description = "The name of the Amazon ECS cluster."
+}
+
 variable "subnet_ids" {
   description = "The subnet ids required for ELB placement."
 }

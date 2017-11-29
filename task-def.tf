@@ -1,9 +1,3 @@
-provider "aws" {
-  access_key = "${var.aws_access_key}"
-  secret_key = "${var.aws_secret_key}"
-  region     = "${var.region}"
-}
-
 resource "aws_ecs_task_definition" "clamav" {
   family = "clamav"
 
@@ -27,11 +21,11 @@ DEFINITION
 }
 
 data "aws_iam_role" "clamav" {
-  name = "${var.iam_role}"
+  name = "${terraform.workspace}-${var.ecs_cluster_name}-${var.iam_role}"
 }
 
 resource "aws_ecs_service" "clamav" {
-  name          = "clamav"
+  name          = "${terraform.workspace}-${var.ecs_cluster_name}-clamav"
   cluster       = "${var.ecs_cluster_id}"
   iam_role      = "${data.aws_iam_role.clamav.id}"
 

@@ -1,5 +1,5 @@
 resource "aws_elb" "clamav" {
-  name = "clamav-elb"
+  name = "${terraform.workspace}-${var.ecs_cluster_name}-clamav-sg"
   /* we don't have default subnets */
   /* availability_zones = ["${split(",", var.availability_zones)}"] */
   subnets = ["${split(",", var.subnet_ids)}"]
@@ -24,7 +24,7 @@ resource "aws_elb" "clamav" {
   cross_zone_load_balancing = true
 
   tags {
-    Name = "clamav-elb"
+    Name = "${terraform.workspace}-${var.ecs_cluster_name}-clamav-sg"
   }
 }
 

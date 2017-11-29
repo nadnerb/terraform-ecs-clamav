@@ -1,5 +1,5 @@
 data "aws_route53_zone" "internal" {
-  name         = "${var.zone_name}"
+  name         = "${terraform.workspace}.${var.zone_name}"
   private_zone = true
 }
 
