@@ -1,9 +1,5 @@
-variable "aws_access_key" {
-  description = "The AWS access key."
-}
-
-variable "aws_secret_key" {
-  description = "The AWS secret key."
+variable "aws_profile" {
+  description = "The AWS profile to use (e.g can be found in /home/user/.aws/credentials)."
 }
 
 variable "region" {
@@ -27,6 +23,19 @@ variable "ecs_cluster_name" {
   description = "The name of the Amazon ECS cluster."
 }
 
+variable "desired_container_count" {
+  description = "The desired number of containers."
+  default = 2
+}
+
+variable "vpc_id" {
+  description = "The vpc id required for security groups."
+}
+
 variable "subnet_ids" {
   description = "The subnet ids required for ELB placement."
+}
+
+variable "cidr_blocks" {
+  description = "The cidr blocks for security groups."
 }

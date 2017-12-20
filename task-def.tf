@@ -29,7 +29,7 @@ resource "aws_ecs_service" "clamav" {
   cluster       = "${var.ecs_cluster_id}"
   iam_role      = "${data.aws_iam_role.clamav.id}"
 
-  desired_count                      = 2
+  desired_count                      = "${var.desired_container_count}"
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 50
 
@@ -38,9 +38,6 @@ resource "aws_ecs_service" "clamav" {
     container_name = "clamav"
     container_port = 3310
   }
-
-  # Track the latest ACTIVE revision
-  /* task_definition = "${aws_ecs_task_definition.clamav.family}:${max("${aws_ecs_task_definition.clamav.revision}", "${data.aws_ecs_task_definition.clamav.revision}")}" */
 
   task_definition = "${aws_ecs_task_definition.clamav.arn}"
 }
